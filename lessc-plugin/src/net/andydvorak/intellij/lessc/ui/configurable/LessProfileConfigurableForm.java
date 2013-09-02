@@ -92,6 +92,7 @@ public class LessProfileConfigurableForm extends NamedConfigurable<LessProfile> 
     private JPanel inputPanel;
     private JPanel buttonPanel;
     private JPanel outputPanel;
+    private JCheckBox generateSourceMapCheckBox;
 
     private TextFieldWithBrowseButton lessDirTextField;
 
@@ -272,6 +273,7 @@ public class LessProfileConfigurableForm extends NamedConfigurable<LessProfile> 
                 !Comparing.strEqual(includePatternTextField.getText(), lessProfile.getIncludePattern()) ||
                 !Comparing.strEqual(excludePatternTextField.getText(), lessProfile.getExcludePattern()) ||
                 !Comparing.equal(compressCssCheckbox.isSelected(), lessProfile.isCompressOutput()) ||
+                !Comparing.equal(generateSourceMapCheckBox.isSelected(), lessProfile.isGenerateSourceMap()) ||
                 !Comparing.equal(cssDirectories, lessProfile.getCssDirectories());
     }
 
@@ -280,6 +282,7 @@ public class LessProfileConfigurableForm extends NamedConfigurable<LessProfile> 
         lessProfile.setIncludePattern(includePatternTextField.getText());
         lessProfile.setExcludePattern(excludePatternTextField.getText());
         lessProfile.setCompressOutput(compressCssCheckbox.isSelected());
+        lessProfile.setGenerateSourceMap(generateSourceMapCheckBox.isSelected());
         lessProfile.setCssDirectories(new ArrayList<CssDirectory>(cssDirectories));
 
         LessManager.getInstance(project).replaceProfile(lessProfileName, lessProfile);
@@ -294,6 +297,7 @@ public class LessProfileConfigurableForm extends NamedConfigurable<LessProfile> 
         includePatternTextField.setText(lessProfile.getIncludePattern());
         excludePatternTextField.setText(lessProfile.getExcludePattern());
         compressCssCheckbox.setSelected(lessProfile.isCompressOutput());
+        generateSourceMapCheckBox.setSelected(lessProfile.isGenerateSourceMap());
     }
 
     public void disposeUIResources() {

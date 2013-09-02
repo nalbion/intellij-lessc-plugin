@@ -29,6 +29,7 @@ public class LessProfile {
     private String includePattern = "";
     private String excludePattern = "";
     private boolean compressOutput = false;
+    private boolean generateSourceMap = false;
     private String name = "";
 
     // Read from external .xml file
@@ -94,6 +95,14 @@ public class LessProfile {
         this.compressOutput = compressOutput;
     }
 
+    public boolean isGenerateSourceMap() {
+        return generateSourceMap;
+    }
+
+    public void setGenerateSourceMap(final boolean generateSourceMap) {
+        this.generateSourceMap = generateSourceMap;
+    }
+
     public String getName() {
         return name;
     }
@@ -106,6 +115,7 @@ public class LessProfile {
         this.name = lessProfile.name;
         this.lessDirPath = lessProfile.lessDirPath;
         this.compressOutput = lessProfile.compressOutput;
+        this.generateSourceMap = lessProfile.generateSourceMap;
         this.includePattern = lessProfile.includePattern;
         this.excludePattern = lessProfile.excludePattern;
         this.cssDirectories.clear();
@@ -123,6 +133,7 @@ public class LessProfile {
         LessProfile that = (LessProfile) o;
 
         if (compressOutput != that.compressOutput) return false;
+        if (generateSourceMap != that.generateSourceMap) return false;
         if (cssDirectories != null ? !cssDirectories.equals(that.cssDirectories) : that.cssDirectories != null)
             return false;
         if (excludePattern != null ? !excludePattern.equals(that.excludePattern) : that.excludePattern != null)
@@ -142,6 +153,7 @@ public class LessProfile {
         result = 31 * result + (includePattern != null ? includePattern.hashCode() : 0);
         result = 31 * result + (excludePattern != null ? excludePattern.hashCode() : 0);
         result = 31 * result + (compressOutput ? 1 : 0);
+        result = 31 * result + (generateSourceMap ? 1 : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
